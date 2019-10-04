@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+use App\Http\Controllers\Blog\BaseController;
+use App\models\BlogCategory;
+use Illuminate\Http\Request;
+use Symfony\Component\Debug\BufferingLogger;
+
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+       $paginator = BlogCategory::paginate(5);
+
+       return view('blog.admin.category.index', compact('paginator'));
     }
 
     /**
@@ -24,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        dd(__METHOD__);
     }
 
     /**
@@ -39,17 +44,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -57,7 +51,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = BlogCategory::findOrFail($id);
+        $categoryList = BlogCategory::all();
+
+        return view('blog.admin.category.edit', compact('item', 'categoryList'));
     }
 
     /**
