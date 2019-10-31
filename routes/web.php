@@ -33,7 +33,7 @@ Route::group($groupData, function(){
        ->only($methods)
        ->names('blog.admin.categories');
 });
-//<
+//< Админка
 
 
 //Route::resource('rest', 'RestTestController')->names('restTest');
